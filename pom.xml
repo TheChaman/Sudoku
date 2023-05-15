@@ -1,59 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+   xmlns="http://maven.apache.org/POM/4.0.0"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>c306</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <!-- bibliothèque Junit-Jupiter -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.0-M1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    <build>
+   <groupId>org.example</groupId>
+   <artifactId>c306</artifactId>
+   <version>1.0-SNAPSHOT</version>
+   <dependencies>
+    <!-- bibliothèque Junit-Jupiter -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.8.0-M1</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+<build>
 
-        <plugins>
-            <plugin><!-- pour l'analyse avec checkstyle -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
-                <configuration>
-                    <excludes>**/module-info.java</excludes>
-                    <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/sudoku/*Exception*</exclude>
-                        <exclude>**/sudoku/*Impl*</exclude>
-                        <exclude>**/sudoku/*Test*</exclude>
-                        <exclude>**/sudokuv2/*</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
+    <plugins>
+        <plugin><!-- pour l'analyse avec checkstyle -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-checkstyle-plugin</artifactId>
+            <version>3.1.1</version>
+            <configuration>
+                <excludes>**/module-info.java</excludes>
+                <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+            </configuration>
+        </plugin>
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>4.7.3.0</version>
+          <configuration>
+            <includeTests>true</includeTests>
+        </configuration>
+    </plugin>
+    <plugin><!-- pour la verification du code avec PMD -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-pmd-plugin</artifactId>
+      <version>3.12.0</version>
+  </plugin> 
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-source-plugin</artifactId>
+    <configuration>
+        <excludes>
+            <exclude>**/sudoku/*Exception*</exclude>
+            <exclude>**/sudoku/*Impl*</exclude>
+            <exclude>**/sudoku/*Test*</exclude>
+            <exclude>**/sudokuv2/*</exclude>
+        </excludes>
+    </configuration>
+    <executions>
+        <execution>
+            <id>attach-sources</id>
+            <goals>
+                <goal>jar</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+</plugins>
+<plugin><!-- pour la couverture de code avec JaCoco lors de l'exécution des tests JUnit -->
+   <groupId>org.jacoco</groupId>
+   <artifactId>jacoco-maven-plugin</artifactId>
+   <version>0.8.8</version>
+   <executions>
+      <execution>
+        <goals>
+          <goal>prepare-agent</goal>
+      </goals>
+  </execution>
+  <execution>
+    <id>report</id>
+    <phase>prepare-package</phase>
+    <goals>
+      <goal>report</goal>
+  </goals>
+</execution>
+</executions>
+</plugin>
+
+</build>
+<properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+</properties>
 
 </project>
