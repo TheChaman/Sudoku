@@ -1,4 +1,4 @@
-package c306.sudoku;
+package sudoku;
 
 /**
  * @author Sébastien Choplin <sebastien.choplin@u-picardie.fr>

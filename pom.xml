@@ -62,7 +62,6 @@
         </execution>
     </executions>
 </plugin>
-</plugins>
 <plugin><!-- pour la couverture de code avec JaCoco lors de l'exécution des tests JUnit -->
    <groupId>org.jacoco</groupId>
    <artifactId>jacoco-maven-plugin</artifactId>
@@ -82,6 +81,8 @@
 </execution>
 </executions>
 </plugin>
+</plugins>
+
 
 </build>
 <properties>

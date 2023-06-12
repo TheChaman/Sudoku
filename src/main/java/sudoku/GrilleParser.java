@@ -1,4 +1,4 @@
-package c306.sudoku;
+package sudoku;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,6 +7,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import sudoku.Exceptions.ElementInterditException;
+import sudoku.Exceptions.HorsBornesException;
+import sudoku.Exceptions.ValeurImpossibleException;
+import sudoku.Exceptions.ValeurInitialeModificationException;
+import sudoku.Implementations.ElementDeGrilleImplAsChar;
+import sudoku.Implementations.GrilleImpl;
 
 /**
  * Méthodes utilitaire permettant de créer une Grille à partir d'un fichier texte.
