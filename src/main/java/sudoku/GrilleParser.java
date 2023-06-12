@@ -7,12 +7,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import sudoku.Exceptions.ElementInterditException;
-import sudoku.Exceptions.HorsBornesException;
-import sudoku.Exceptions.ValeurImpossibleException;
-import sudoku.Exceptions.ValeurInitialeModificationException;
-import sudoku.Implementations.ElementDeGrilleImplAsChar;
-import sudoku.Implementations.GrilleImpl;
 
 /**
  * Méthodes utilitaire permettant de créer une Grille à partir d'un fichier texte.
@@ -29,7 +23,6 @@ import sudoku.Implementations.GrilleImpl;
  * @author Sébastien Choplin <sebastien.choplin@u-picardie.fr>
  */
 public class GrilleParser {
-    private static final char EMPTY = '-';
 
     /**
      * constructeur.
@@ -71,7 +64,8 @@ public class GrilleParser {
                 throw new IllegalArgumentException("pas le bon nombre de valeurs possibles");
             }
             ElementDeGrille[] elementDeGrilles = elementDeGrilleMap.values().toArray(new ElementDeGrille[]{});
-            Grille grille = new GrilleImpl(elementDeGrilles);
+            ElementDeGrille[][] grilleTab = new ElementDeGrille[dimension][dimension];
+
 
             for (int i = 0; i < dimension; i++) {
                 line = reader.readLine();
@@ -85,13 +79,12 @@ public class GrilleParser {
                         if (elementDeGrille == null) {
                             throw new ValeurImpossibleException(String.valueOf(c));
                         }
-                        grille.setValue(i, j, elementDeGrille);
+                        grilleTab[i][j] = elementDeGrille;
                     }
                 }
             }
 
-
-            return grille;
+            return new GrilleImpl(elementDeGrilles, grilleTab);
         }
     }
 
