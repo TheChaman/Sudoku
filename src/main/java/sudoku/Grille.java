@@ -19,12 +19,12 @@ public interface Grille {
     /**
      * Renvoie les ElementDeGrille pouvant exister dans le grille.
      */
-    Set<ElementDeGrille> getElements();
+    public Set<ElementDeGrille> getElements();
 
     /**
      * @return largeur/hauteur de la grille
      */
-    int getDimension();
+    public int getDimension();
 
     /**
      * Affecte une valeur dans une case de la grille, ou null pour 'vider' la case
@@ -38,7 +38,7 @@ public interface Grille {
      * @throws HorsBornesException                 si x ou y sont en dehors de la grille
      * @throws ValeurInitialeModificationException si une valeur initiale de la grille est en position x,y
      */
-    void setValue(int x, int y, ElementDeGrille value)
+    public void setValue(int x, int y, ElementDeGrille value)
             throws HorsBornesException, ValeurImpossibleException, ElementInterditException, ValeurInitialeModificationException;
 
     /**
@@ -49,14 +49,14 @@ public interface Grille {
      * @return élément de la grille de la case x,y, null s'il n'y a pas d'élément à cette position
      * @throws HorsBornesException si x ou y sont en dehors de la grille
      */
-    ElementDeGrille getValue(int x, int y) throws HorsBornesException;
+    public ElementDeGrille getValue(int x, int y) throws HorsBornesException;
 
     /**
      * Teste si une grille est remplie.
      *
      * @return true si la grille est complete
      */
-    boolean isComplete();
+    public boolean isComplete();
 
     /**
      * Teste si une valeur peut être placée dans la grille.
@@ -68,7 +68,7 @@ public interface Grille {
      * @throws HorsBornesException      si x ou y sont hors bornes
      * @throws ElementInterditException si value n'est pas un caractere pouvant être mis dans la grille
      */
-    boolean isPossible(int x, int y, ElementDeGrille value)
+    public boolean isPossible(int x, int y, ElementDeGrille value)
             throws HorsBornesException, ElementInterditException;
 
     /**
@@ -76,6 +76,6 @@ public interface Grille {
      * @param y     position y dans la grille
      * @return true si la case x,y contient une valeur initiale de la grille.
      */
-    boolean isValeurInitiale(int x,int y);
+    public boolean isValeurInitiale(int x,int y);
 
 }
