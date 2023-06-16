@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import sudoku.Exceptions.*;
+import sudoku.Implementations.*;
+
 
 /**
  * Méthodes utilitaire permettant de créer une Grille à partir d'un fichier texte.

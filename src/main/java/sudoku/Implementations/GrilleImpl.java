@@ -1,7 +1,5 @@
 package sudoku.Implementations;
-package sudoku.ElementDeGrille;
-
-
+import sudoku.ElementDeGrille;
 import sudoku.Grille;
 
 /**
@@ -9,7 +7,7 @@ import sudoku.Grille;
  */
 public class GrilleImpl implements Grille {
     
-/**
+/**cl
  * Grille
  */
 private final ElementDeGrille[][] grille;
@@ -24,7 +22,7 @@ private final ElementDeGrille[] vaGrille;
  * @param grille .
  */
     
-GrilleImpl(final ElementDeGrille[][] g){
+GrilleImpl(final ElementDeGrille[] edg,final ElementDeGrille[][] g){
 
 this.grille = ElementDeGrille[g.length][g.length];
 
@@ -36,8 +34,17 @@ for(int i=0; i<g[0].length; i++){
 
 }
 
+}
 
+ElementDeGrille[] getElements(){
 
+    ElementDeGrille[] myElements;
+
+    for(int i=0; i<this.vaGrille.length; i++){
+        myElements.add(this.vaGrille[i]);
+    }
+
+    return myElements;
 }
 
 }
