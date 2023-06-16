@@ -21,13 +21,16 @@ private final ElementDeGrille[] vaGrille;
  * Constructeur de la grille
  * @param grille .
  */
-    
-GrilleImpl(final ElementDeGrille[] edg,final ElementDeGrille[][] g){
 
-this.grille = ElementDeGrille[g.length][g.length];
+public GrilleImpl(final ElementDeGrille[] edg, final ElementDeGrille[][] g){
+
+this.grille = new ElementDeGrille[g.length][g.length];
+
+vaGrille = new ElementDeGrille[edg.length];
 
 for(int i=0; i<g[0].length; i++){
-    vaGrille.add(new ElementDeGrille((i+1)));
+    vaGrille[i]=edg[i];
+
     for(int j=0; j<g[0].length; j++){
         this.grille[i][j] = g[i][j];
     }
