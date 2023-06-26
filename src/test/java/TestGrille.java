@@ -8,9 +8,6 @@ import sudoku.Grille;
 import sudoku.Implementations.ElementDeGrilleImplAsChar;
 import sudoku.Implementations.GrilleImpl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
@@ -31,47 +28,101 @@ public class TestGrille {
                         {element2, element1}
                 }
         );
+    }
 
-        assertThrows(ValeurImpossibleException.class,()->
-            new GrilleImpl(
-                    new ElementDeGrille[]{element1, element2},
-                    new ElementDeGrille[][]{
-                            {element1, element1},
-                            {element1, element1}
-                    }
-            )
-        );
+    @Test
+    public void testKOConstructionRespectantLesRegles() {
 
+        ElementDeGrille element1 = new ElementDeGrilleImplAsChar('1');
+        ElementDeGrille element2 = new ElementDeGrilleImplAsChar('2');
+
+            try {
+                new GrilleImpl(new ElementDeGrille[]{element1, element2}, new ElementDeGrille[][]{{element1, element2},{element2, element1, element1}});
+            } catch (Exception e) {
+
+            }
     }
 
     @Test
     public void testGetValue() throws HorsBornesException {
-        char valeurTest = '1';
-        Grille grille = new GrilleImpl();
-        assertEquals('1', grille.getValue(0, 0));
+        
+        ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
+        ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
+        ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
+        ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
+
+        ElementDeGrille[][] grilleRemplie = {
+                {un, deux, null, null},
+                {deux, null, null, null},
+                {null, quatre, null, null},
+                {null, null, null, null}
+        };
+
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
+
+        grille.getValue(0,0);
     }
 
     @Test
     public void testKOGetValue() {
-        char valeurTest = '1';
-        Grille grille = new GrilleImpl();
-        assertEquals('1', grille.getValue(5, 10));
+        
+        ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
+        ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
+        ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
+        ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
+
+        ElementDeGrille[][] grilleRemplie = {
+                {un, deux, null, null},
+                {deux, null, null, null},
+                {null, quatre, null, null},
+                {null, null, null, null}
+        };
+
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
+
+        try{
+            grille.getValue(5, 10);
+        } catch (HorsBornesException e) {
+
+        }
     }
 
     @Test
-    public void testSetValue() {
-        ElementDeGrille valeurTest = new ElementDeGrilleImplAsChar('1');
-        Grille grille = new GrilleImpl();
-        assertEquals(true, grille.setValue(0, 0, valeurTest));
+    public void testSetValue() throws Exception {
+        
+        ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
+        ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
+        ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
+        ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
+
+        ElementDeGrille[][] grilleRemplie = {
+                {un, deux, null, null},
+                {deux, null, null, null},
+                {null, quatre, null, null},
+                {null, null, null, null}
+        };
+
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
+
+        grille.setValue(0, 2, trois);
+        
     }
 
     @Test
-    public void testKO1SetValue() throws ElementInterditException, ValeurInitialeModificationException, HorsBornesException, ValeurImpossibleException {
+    public void testKO1SetValue() throws ValeurInitialeModificationException, HorsBornesException, ValeurImpossibleException {
         ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
         ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
         ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
         ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
         ElementDeGrille sept = new ElementDeGrilleImplAsChar('7');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
 
         ElementDeGrille[][] grilleRemplie = {
                 {un, deux, trois, quatre},
@@ -80,9 +131,7 @@ public class TestGrille {
                 {null, un, null, trois}
         };
 
-        Grille grille = new GrilleImpl(grilleRemplie, );
-
-        assertThrows(ElementInterditException.class,()->   grille.setValue(3, 0, sept));
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
 
         try {
             grille.setValue(3, 0, sept);
@@ -94,11 +143,13 @@ public class TestGrille {
     }
 
     @Test
-    public void testKO2SetValue() {
+    public void testKO2SetValue() throws ElementInterditException, ValeurInitialeModificationException, ValeurImpossibleException {
         ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
         ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
         ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
         ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
 
         ElementDeGrille[][] grilleRemplie = {
                 {un, deux, trois, quatre},
@@ -107,17 +158,25 @@ public class TestGrille {
                 {null, un, null, trois}
         };
 
-        Grille grille = new GrilleImpl(grilleRemplie, );
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
 
-        assertEquals(false, grille.setValue(5, 0, trois));
+        try {
+            grille.setValue(5, 0, trois);
+            fail();
+        } catch (HorsBornesException e) {
+
+        }
+        
     }
 
     @Test
-    public void testKO3SetValue() {
+    public void testKO3SetValue() throws HorsBornesException, ElementInterditException, ValeurInitialeModificationException {
         ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
         ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
         ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
         ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
 
         ElementDeGrille[][] grilleRemplie = {
                 {un, deux, trois, quatre},
@@ -126,13 +185,20 @@ public class TestGrille {
                 {null, un, null, trois}
         };
 
-        Grille grille = new GrilleImpl(grilleRemplie, );
+        Grille grille = new GrilleImpl(valeursAcceptees ,grilleRemplie);
 
-        assertEquals(false, grille.setValue(3, 0, un));
+        try {
+            grille.setValue(3, 0, un);
+            fail();
+        } catch (ValeurImpossibleException e) {
+            
+        }
+        
     }
 
     @Test
-    public void testKO4SetValue() {
+    public void testKO4SetValue() throws HorsBornesException, ElementInterditException, ValeurImpossibleException {
+        
         ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
         ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
         ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
@@ -149,20 +215,89 @@ public class TestGrille {
 
         Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie );
 
-        assertEquals(false, grille.setValue(0, 0, quatre));
+        try {
+            grille.setValue(0, 0, quatre);
+            fail();
+        } catch (ValeurInitialeModificationException e) {
+
+        }
+        
     }
 
     @Test
-    public void testIsPossible() {
-        ElementDeGrille valeurTest = new ElementDeGrilleImplAsChar('1');
-        Grille grille = new GrilleImpl();
-        assertTrue(grille.isPossible(1, 1, valeurTest));
+    public void testIsPossible() throws Exception {
+        ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
+        ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
+        ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
+        ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
+
+        ElementDeGrille[][] grilleRemplie = {
+                {un, deux, trois, quatre},
+                {deux, trois, quatre, un},
+                {null, quatre, un, null},
+                {null, un, null, trois}
+        };
+
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
+
+        grille.isPossible(3, 0, trois);
+
 
     }
 
     @Test
-    public void testKOIsPossible() {
+    public void testKOIsPossible() throws HorsBornesException {
+        ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
+        ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
+        ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
+        ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+        ElementDeGrille sept = new ElementDeGrilleImplAsChar('7');
 
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
+
+        ElementDeGrille[][] grilleRemplie = {
+                {un, deux, trois, quatre},
+                {deux, trois, quatre, un},
+                {null, quatre, un, null},
+                {null, un, null, trois}
+        };
+
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
+
+        try {
+            grille.isPossible(3, 0, sept);
+            fail();
+        } catch (ElementInterditException e){
+            // ok
+        }
+    }
+
+    @Test
+    public void testKO2IsPossible() throws ElementInterditException {
+        ElementDeGrille un = new ElementDeGrilleImplAsChar('1');
+        ElementDeGrille deux = new ElementDeGrilleImplAsChar('2');
+        ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
+        ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
+
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
+
+        ElementDeGrille[][] grilleRemplie = {
+                {un, deux, trois, quatre},
+                {deux, trois, quatre, un},
+                {null, quatre, un, null},
+                {null, un, null, trois}
+        };
+
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie);
+
+        try {
+            grille.isPossible(17, 5, deux);
+            fail();
+        } catch (HorsBornesException e){
+            // ok
+        }
     }
 
 

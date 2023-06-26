@@ -4,7 +4,6 @@ import sudoku.Grille;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Arrays;
-import java.util.ArrayList;
 /**
  * Implementation de l'interface Grille.
  * 
