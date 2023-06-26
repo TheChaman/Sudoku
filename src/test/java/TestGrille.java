@@ -138,6 +138,8 @@ public class TestGrille {
         ElementDeGrille trois = new ElementDeGrilleImplAsChar('3');
         ElementDeGrille quatre = new ElementDeGrilleImplAsChar('4');
 
+        ElementDeGrille[] valeursAcceptees = new ElementDeGrille[]{un,deux,trois,quatre};
+        
         ElementDeGrille[][] grilleRemplie = {
                 {un, deux, trois, quatre},
                 {deux, trois, quatre, un},
@@ -145,7 +147,7 @@ public class TestGrille {
                 {null, un, null, trois}
         };
 
-        Grille grille = new GrilleImpl(grilleRemplie, );
+        Grille grille = new GrilleImpl(valeursAcceptees, grilleRemplie );
 
         assertEquals(false, grille.setValue(0, 0, quatre));
     }
