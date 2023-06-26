@@ -21,28 +21,7 @@ private final ElementDeGrille[][] grille;
  */
 private final ElementDeGrille[] vaGrille;
 
-private class coords { 
-    private int x; 
-    private int y;
-
-    coords(){}
-
-    coords(int x2, int y2){
-        this.x = x2;
-        this.y = y2;
-    }
-
-    public boolean isEqual(int x2, int y2){
-
-        if (this.x == x2 && this.y == y2) { 
-            return true;
-        } else {
-            return false;
-        }
-    }
-    };
-
-private ArrayList<coords> vaInitial;
+private final boolean [][] valeursInitial;
 
 
 /**
@@ -51,7 +30,7 @@ private ArrayList<coords> vaInitial;
  */
 public GrilleImpl(final ElementDeGrille[] valeurAcceptees, final ElementDeGrille[][] g){
 
-this.vaInitial = new ArrayList<coords>() ;
+this.valeursInitial = new boolean[g.length][g.length];
 this.grille = new ElementDeGrille[g.length][g.length];
 vaGrille = new ElementDeGrille[valeurAcceptees.length];
 
@@ -59,13 +38,12 @@ for(int i=0; i<g[0].length; i++){
     vaGrille[i]=valeurAcceptees[i];
     for(int j=0; j<g[0].length; j++){
         this.grille[i][j] = g[i][j];
-        if(g[i][j] == null){
-            this.vaInitial.add(new coords(i,j));
+        if(g[i][j] != null){
+            this.valeursInitial[i][j] = false;
         }
 
     }
 }
-
 
 
 }
@@ -127,16 +105,13 @@ public boolean isPossible(int x, int y, ElementDeGrille value){
 @Override
 public boolean isValeurInitiale(int x,int y){
 
-    coords myCoords = new coords();
-    boolean isValeurIni = false;
+    boolean isValeuriIni = false;
 
-    for(int i = 0; i < this.vaInitial.size(); i++){
-        myCoords = this.vaInitial.get(i);
-        if(myCoords.isEqual(x,y)){
-            isValeurIni = true;
-        };
+    if(this.valeursInitial[x][y]){
+        return isValeuriIni = true;
     }
-    return isValeurIni;
+
+    return isValeuriIni;
 }
 
 }
