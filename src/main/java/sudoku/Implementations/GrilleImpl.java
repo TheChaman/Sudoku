@@ -15,7 +15,7 @@ public class GrilleImpl implements Grille {
 /**
  * Grille.
  */
-private final ElementDeGrille[][] grille;
+private final ElementDeGrille [][] grille;
 
 /**
  * Valeurs autorises.
@@ -35,9 +35,9 @@ this.valeursInitial = new boolean[g.length][g.length];
 this.grille = new ElementDeGrille[g.length][g.length];
 this.vaGrille = new ElementDeGrille[valeurAcceptees.length];
 
-for(int i=0; i<g[0].length; i++){
-    this.vaGrille[i]=valeurAcceptees[i];
-    for(int j=0; j<g[0].length; j++){
+for( int i = 0; i < g[0].length; i++ ) {
+    this.vaGrille[i] = valeurAcceptees[i];
+    for(int j=0; j < g[0].length; j++){
         this.grille[i][j] = g[i][j];
         if(g[i][j] != null){
             this.valeursInitial[i][j] = true;
@@ -82,13 +82,13 @@ public void setValue (int x, int y, ElementDeGrille value) throws HorsBornesExce
     //Les règles du Sudoku pour une sous-grille sont respectés ?
     int tailleSG = (int)Math.sqrt( this.grille[0].length );
     int indiceSGXDebut = x - (x % tailleSG);
-    int indiceDGXFin = indiceSGXDebut + tailleSG;
+    int indiceDGXFin = indiceSGXDebut + (tailleSG-1);
     int indiceSGYDebut = y - (y % tailleSG);
-    int indiceSGYFin = indiceSGYDebut + tailleSG;
+    int indiceSGYFin = indiceSGYDebut + (tailleSG-1);
 
     for (int i = indiceSGXDebut; i <= indiceDGXFin; i++) {
         for (int j = indiceSGYDebut; j <= indiceSGYFin; j++) {
-            if (getValue(x,y) == value) {
+            if (getValue(i,j) == value) {
                 throw new ValeurImpossibleException("Votre coup ne respecte pas les regles du sudoku");
             }
         }
