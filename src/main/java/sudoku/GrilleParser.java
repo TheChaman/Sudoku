@@ -15,8 +15,9 @@ import sudoku.Implementations.GrilleImpl;
 
 
 /**
- * Méthodes utilitaire permettant de créer une Grille à partir d'un fichier texte.
- * Il est attendu que la première ligne contiennet : le symbole de case vide, suivi des symboles possibles dans la grille (en UTF-8).
+ * Méthodes permettant de créer une Grille à partir d'un fichier texte.
+ * Il est attendu que la première ligne contiennet : le symbole de case vide.
+ * suivi des symboles possibles dans la grille (en UTF-8).
  * Les autres lignes contiennent le contenu de la grille.
  * <p>
  * Exemple:
@@ -40,7 +41,7 @@ final class GrilleParser {
      * Fonction parse.
      *
      * @param in recu.
-     * @throws IOException               format de grille en caractere incorrect.
+     * @throws IOException format de grille en caractere incorrect.
      * @throws ValeurImpossibleException si la grille ne respècte pas les règles.
      * @return une grille.
      */
@@ -48,7 +49,7 @@ final class GrilleParser {
             throws IOException, ElementInterditException,
             ValeurInitialeModificationException,
             HorsBornesException, ValeurImpossibleException {
-        try (BufferedReader reader = 
+        try (BufferedReader reader =
         new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
 
 

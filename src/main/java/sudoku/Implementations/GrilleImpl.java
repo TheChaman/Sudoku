@@ -84,7 +84,8 @@ ElementInterditException, ValeurImpossibleException {
     // La valeur est une valeur initiale ?
     if (isValeurInitiale(x, y)) {
         throw new ValeurInitialeModificationException(
-            "Erreur, on tente de modifier la valeur Initiale :" + getValue(x, y) + "a la position x:" + x + "et y:" + y);
+            "Erreur, on tente de modifier la valeur Initiale :" + getValue(x, y)
+            + "a la position x:" + x + "et y:" + y);
     }
 
     // La valeur est-elle une valeur autorisée ?
@@ -131,7 +132,7 @@ ElementInterditException, ValeurImpossibleException {
 }
 
 @Override
-public ElementDeGrille getValue(final int x, final int y) 
+public ElementDeGrille getValue(final int x, final int y)
 throws HorsBornesException {
 
     if (x > this.grille[0].length || y  > this.grille[0].length) {

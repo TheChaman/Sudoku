@@ -16,5 +16,6 @@ public interface Solveur {
      * @param grille Grille à résoudre
      * @return true si la grille a été résolue
      */
-    boolean solve(Grille grille) throws HorsBornesException, ElementInterditException, ValeurInitialeModificationException, ValeurImpossibleException;
+    boolean solve(Grille grille) throws HorsBornesException, ElementInterditException,
+    ValeurInitialeModificationException, ValeurImpossibleException;
 }
