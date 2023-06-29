@@ -42,7 +42,8 @@ final class GrilleParser {
      *
      * @param in recu.
      * @throws IOException format de grille en caractere incorrect.
-     * @throws ValeurImpossibleException si la grille ne respècte pas les règles.
+     * @throws ValeurImpossibleException
+     * si la grille ne respècte pas les règles.
      * @return une grille.
      */
     public static Grille parse(final InputStream in)
@@ -59,7 +60,8 @@ final class GrilleParser {
             }
             final int dimension = line.length() - 1;
             final char vide = line.charAt(0);
-            Map<Character, ElementDeGrille> elementDeGrilleMap = new HashMap<>();
+            Map<Character, ElementDeGrille> elementDeGrilleMap =
+            new HashMap<>();
             for (int i = 1; i < line.length(); i++) {
                 char value = line.charAt(i);
                 if (value == vide) {
