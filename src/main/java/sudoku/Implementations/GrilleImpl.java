@@ -1,6 +1,9 @@
 package sudoku.Implementations;
 import sudoku.ElementDeGrille;
-import sudoku.Exceptions.*;
+import sudoku.Exceptions.ElementInterditException;
+import sudoku.Exceptions.ValeurImpossibleException;
+import sudoku.Exceptions.ValeurInitialeModificationException;
+import sudoku.Exceptions.HorsBornesException;
 import sudoku.Grille;
 import java.util.Set;
 import java.util.HashSet;
@@ -8,10 +11,10 @@ import java.util.Arrays;
 
 /**
  * Implementation de l'interface Grille.
- * 
+ *
  */
 public class GrilleImpl implements Grille {
-    
+
 /**
  * Grille.
  */
@@ -21,12 +24,20 @@ private final ElementDeGrille[][] grille;
  */
 private final ElementDeGrille[] vaGrille;
 
+/**
+ * Tableau des valeurs initials.
+ * [x,y] == true si valeur initial.
+ * [x,y] == false si valeur non initial.
+ *
+ */
 private final boolean[][] valeursInitial;
 /**
  * Constructeur de la grille.
- * @param grille .
+ * @param valeurAcceptees .
+ * @param g .
  */
-public GrilleImpl(final ElementDeGrille[] valeurAcceptees, final ElementDeGrille[][] g) {
+public GrilleImpl(
+final ElementDeGrille[] valeurAcceptees, final ElementDeGrille[][] g) {
 
 this.valeursInitial = new boolean[g.length][g.length];
 this.grille = new ElementDeGrille[g.length][g.length];
@@ -58,14 +69,20 @@ public Set<ElementDeGrille> getElements() {
     return new HashSet<>(Arrays.asList(this.vaGrille));
 }
 
+/**
+ * Déclaration de fonctions sur plusieurs lignes.
+ * Afin de respecter les règles checkstyle
+ */
 @Override
-public void setValue (int x, int y, ElementDeGrille value) throws HorsBornesException,ValeurInitialeModificationException,ElementInterditException,ValeurImpossibleException {
+public void setValue (final int  x, final int y, final ElementDeGrille value) 
+throws HorsBornesException,ValeurInitialeModificationException,
+ElementInterditException,ValeurImpossibleException {
 
     // Grille[x,y] dépasse les bornes ?
     if (x > this.grille[0].length || y  > this.grille[0].length) {
         throw new HorsBornesException("erreur");
     }
-    
+
     // La valeur est une valeur initiale ?
     if (isValeurInitiale(x,y)) {
         throw new ValeurInitialeModificationException("Erreur, on tente de modifier la valeur Initiale :"+getValue(x,y)+"a la position x:"+x+"et y:"+y);      
@@ -111,7 +128,7 @@ public void setValue (int x, int y, ElementDeGrille value) throws HorsBornesExce
 }
 
 @Override
-public ElementDeGrille getValue(int x, int y) throws HorsBornesException {
+public ElementDeGrille getValue(final int x, final int y) throws HorsBornesException {
 
     if (x > this.grille[0].length || y  > this.grille[0].length) {
         throw new HorsBornesException("error");
@@ -138,7 +155,7 @@ public boolean isComplete() {
 }
 
 @Override
-public boolean isPossible(int x, int y, ElementDeGrille value) throws HorsBornesException, ElementInterditException {
+public boolean isPossible(final int x, final int y, final ElementDeGrille value) throws HorsBornesException, ElementInterditException {
 
     boolean isPossible = true;
 
@@ -158,7 +175,7 @@ public boolean isPossible(int x, int y, ElementDeGrille value) throws HorsBornes
 }
 
 @Override
-public boolean isValeurInitiale(int x,int y) {
+public boolean isValeurInitiale(final int x, final int  y) {
 
     boolean isValeuriIni = false;
 
