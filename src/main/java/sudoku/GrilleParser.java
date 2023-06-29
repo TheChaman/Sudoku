@@ -28,7 +28,7 @@ import sudoku.Implementations.GrilleImpl;
  *
  * @author Sébastien Choplin <sebastien.choplin@u-picardie.fr>
  */
-public class GrilleParser {
+final class GrilleParser {
 
     /**
      * constructeur.

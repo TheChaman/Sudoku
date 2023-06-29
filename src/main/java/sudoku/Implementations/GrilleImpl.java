@@ -86,7 +86,7 @@ public void setValue(final int  x, final int y, final ElementDeGrille value) thr
 
     // La valeur est-elle une valeur autorisée ?
     if (!(Arrays.asList(this.vaGrille).contains(value))) {
-        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");      
+        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");  
     }
 
     //Les règles du Sudoku pour une sous-grille sont respectés ?
@@ -112,7 +112,7 @@ public void setValue(final int  x, final int y, final ElementDeGrille value) thr
             throw new ValeurImpossibleException("Votre coup ne respecte pas les regles du sudoku");
         }
     }
-    
+
     // La valeur est-elle déjà présente dans la colonne ?
     for (int j = 0; j < this.grille[0].length; j++) {
         if (this.grille[x][j] == value && (j != y)) {
@@ -159,11 +159,11 @@ public boolean isPossible(final int x, final int y, final ElementDeGrille value)
         isPossible = false;
         throw new HorsBornesException("L'indice x :" + x + " et y :" + y + " est hors borne");
     }
-    
+
     // La valeur est-elle une valeur autorisée ?
     if (!(Arrays.asList(this.vaGrille).contains(value))) {
         isPossible = false;
-        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");      
+        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");
     }
 
     return isPossible;
@@ -175,7 +175,7 @@ public boolean isValeurInitiale(final int x, final int  y) {
 
     boolean isValeuriIni = false;
 
-    if (this.valeursInitial[x][y] == true) {
+    if (this.valeursInitial[x][y]) {
         isValeuriIni = true;
     }
 

@@ -1,6 +1,5 @@
 package sudoku;
 import java.util.Set;
-
 import sudoku.Exceptions.ElementInterditException;
 import sudoku.Exceptions.HorsBornesException;
 import sudoku.Exceptions.ValeurImpossibleException;
