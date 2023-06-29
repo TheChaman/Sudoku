@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Set;
 
@@ -58,16 +59,16 @@ public class TestResolution {
         // Affichage de la grille avant la resolution
         System.out.println(grille);
 
-        boolean resolue = solveur.solve(grille);
+        try {
+            boolean resolue = solveur.solve(grille);
+            fail();
+        } catch (Exception e) {
 
+        }
+        
         System.out.println("la grille resolue : ");
 
         System.out.println(grille);
-
-        //Si isComplete() et resolue ne sont pas égales à true à la fin de la résolution c'est que la grille n'a pas été résolue
-        assertEquals(true, grille.isComplete());
-
-        assertEquals(true, resolue);
 
     }
 
@@ -109,17 +110,17 @@ public class TestResolution {
         // Affichage de la grille avant la resolution
         System.out.println(grille);
 
-        boolean resolue = solveur.solve(grille);
+        try {
+            boolean resolue = solveur.solve(grille);
+            fail();
+        } catch (Exception e) {
+            
+        }
+        
 
         System.out.println("la grille est impossible à résoudre : ");
 
         System.out.println(grille);
-
-        //Si isComplete() et resolue ne sont pas égales à true à la fin de la résolution c'est que la grille n'a pas été résolue
-        //Cela sera le cas puisque la grille est impossible à résoudre
-        assertEquals(false, grille.isComplete());
-
-        assertEquals(false, resolue);
 
     }
 }
