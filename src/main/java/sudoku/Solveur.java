@@ -12,7 +12,7 @@ import sudoku.Exceptions.ValeurInitialeModificationException;
  */
 public interface Solveur {
     /**
-     * Résoud une Grille
+     * Résout une Grille
      *
      * @param grille Grille à résoudre
      * @return true si la grille a été résolue

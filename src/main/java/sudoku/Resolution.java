@@ -12,10 +12,15 @@ import sudoku.Exceptions.ValeurInitialeModificationException;
  */
 public class Resolution implements Solveur {
     /**
-     * Résoud une Grille
+     * Résout une Grille
      *
      * @param grille Grille à résoudre
-     * @return true si la grille a été résolue
+     * @return true si la grille a été résolue, c'est à dire que toutes les cases 
+     * sont remplies en respectant les règles
+     * @throws HorsBornesException
+     * @throws ElementInterditException
+     * @throws ValeurInitialeModificationException
+     * @throws ValeurImpossibleException
      */
     public final boolean solve(final Grille grille) throws HorsBornesException, ElementInterditException, ValeurInitialeModificationException, ValeurImpossibleException {
         System.out.println(grille);
@@ -40,13 +45,15 @@ public class Resolution implements Solveur {
 
                     if(mouvementPossible && valeurASaisir == null) {
                         grille.setValue(i, j, caseATester);
+                        if(solve(grille)){
+                            return true;
+                        }
                     } else {
                         grille.setValue(i, j, null);
                     }
                 }
             }
         }
-
         return false;
     }
 }
