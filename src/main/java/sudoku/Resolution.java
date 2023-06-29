@@ -14,14 +14,16 @@ public class Resolution implements Solveur {
      * Résout une Grille.
      *
      * @param grille Grille à résoudre.
-     * @return true si la grille a été résolue, c'est à dire que toutes les cases.
-     * sont remplies en respectant les règles.
+     * @return true si la grille a été résolue.
+     * Chaque case est remplie en respectant les règles.
      * @throws HorsBornesException
      * @throws ElementInterditException
      * @throws ValeurInitialeModificationException
      * @throws ValeurImpossibleException
      */
-    public final boolean solve(final Grille grille) throws HorsBornesException, ElementInterditException, ValeurInitialeModificationException, ValeurImpossibleException {
+    public final boolean solve(final Grille grille)
+    throws HorsBornesException, ElementInterditException,
+    ValeurInitialeModificationException, ValeurImpossibleException {
         System.out.println(grille);
 
         Set<ElementDeGrille> elementsValides = grille.getElements();
@@ -31,7 +33,7 @@ public class Resolution implements Solveur {
         int nombreLignes = grille.getDimension();
         int nombreCol = nombreLignes;
 
-        // Si la grille de Sudoku est complète, on arrête le programme puisque le sudoku est résolu
+        // Grille complète, on arrête le programme puisque le sudoku est résolu
         if (grille.isComplete()) {
             return true;
         }
