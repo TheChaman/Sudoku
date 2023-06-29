@@ -86,7 +86,7 @@ public void setValue(final int  x, final int y, final ElementDeGrille value) thr
 
     // La valeur est-elle une valeur autorisée ?
     if (!(Arrays.asList(this.vaGrille).contains(value))) {
-        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");  
+        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");
     }
 
     //Les règles du Sudoku pour une sous-grille sont respectés ?
@@ -108,14 +108,14 @@ public void setValue(final int  x, final int y, final ElementDeGrille value) thr
 
     // La valeur est-elle déjà présente dans la colonne ?
     for (int i = 0; i < this.grille[0].length; i++) {
-        if (this.grille[i][y] == value && (i != x)) {
+        if (this.grille[i][y] == value && i != x) {
             throw new ValeurImpossibleException("Votre coup ne respecte pas les regles du sudoku");
         }
     }
 
     // La valeur est-elle déjà présente dans la colonne ?
     for (int j = 0; j < this.grille[0].length; j++) {
-        if (this.grille[x][j] == value && (j != y)) {
+        if (this.grille[x][j] == value && j != y) {
             throw new ValeurImpossibleException("Votre coup ne respecte pas les regles du sudoku");
         }
     }
