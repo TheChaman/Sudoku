@@ -1,5 +1,4 @@
 package sudoku;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,8 +6,12 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import sudoku.Exceptions.*;
-import sudoku.Implementations.*;
+import sudoku.Exceptions.ElementInterditException;
+import sudoku.Exceptions.ValeurImpossibleException;
+import sudoku.Exceptions.ValeurInitialeModificationException;
+import sudoku.Exceptions.HorsBornesException;
+import sudoku.Implementations.ElementDeGrilleImplAsChar;
+import sudoku.Implementations.GrilleImpl;
 
 
 /**
@@ -36,9 +39,10 @@ public class GrilleParser {
     /**
      * Fonction parse.
      *
-     * @param in recu
-     * @throws IOException               format de grille en caractere incorrect
-     * @throws ValeurImpossibleException si la grille ne respècte pas les règles
+     * @param in recu.
+     * @throws IOException               format de grille en caractere incorrect.
+     * @throws ValeurImpossibleException si la grille ne respècte pas les règles.
+     * @return une grille.
      */
     public static Grille parse(final InputStream in)
             throws IOException, ElementInterditException, ValeurInitialeModificationException, HorsBornesException, ValeurImpossibleException {

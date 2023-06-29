@@ -6,17 +6,17 @@ import sudoku.Exceptions.HorsBornesException;
 import sudoku.Exceptions.ValeurImpossibleException;
 import sudoku.Exceptions.ValeurInitialeModificationException;
 /**
- * Interface de résolveur de Grille
+ * Interface de résolveur de Grille.
  *
  * @author groupe R
  */
 public class Resolution implements Solveur {
     /**
-     * Résout une Grille
+     * Résout une Grille.
      *
-     * @param grille Grille à résoudre
-     * @return true si la grille a été résolue, c'est à dire que toutes les cases 
-     * sont remplies en respectant les règles
+     * @param grille Grille à résoudre.
+     * @return true si la grille a été résolue, c'est à dire que toutes les cases.
+     * sont remplies en respectant les règles.
      * @throws HorsBornesException
      * @throws ElementInterditException
      * @throws ValeurInitialeModificationException
@@ -33,19 +33,19 @@ public class Resolution implements Solveur {
         int nombreCol = nombreLignes;
 
         // Si la grille de Sudoku est complète, on arrête le programme puisque le sudoku est résolu
-        if(grille.isComplete()) {
+        if (grille.isComplete()) {
             return true;
         }
 
-        for(int i = 0; i < nombreLignes; i++) {
-            for(int j = 0; j < nombreCol; j++) {
-                for(ElementDeGrille caseATester: elementsValides) {
+        for (int i = 0; i < nombreLignes; i++) {
+            for (int j = 0; j < nombreCol; j++) {
+                for (ElementDeGrille caseATester: elementsValides) {
                     mouvementPossible = grille.isPossible(i, j, caseATester);
                     ElementDeGrille valeurASaisir = grille.getValue(i, j);
 
-                    if(mouvementPossible && valeurASaisir == null) {
+                    if (mouvementPossible && valeurASaisir == null) {
                         grille.setValue(i, j, caseATester);
-                        if(solve(grille)){
+                        if (solve(grille)) {
                             return true;
                         }
                     } else {

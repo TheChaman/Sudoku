@@ -9,7 +9,7 @@ public class ElementDeGrilleImplAsChar implements ElementDeGrille {
 
 /**.
  * value : 
- * valeur de l'element à insérer dans la grille
+ * valeur de l'element à insérer dans la grille.
  */
 private char value;
 

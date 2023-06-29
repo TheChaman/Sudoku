@@ -19,6 +19,7 @@ public class GrilleImpl implements Grille {
  * Grille.
  */
 private final ElementDeGrille[][] grille;
+
 /**
  * Valeurs autorises.
  */
@@ -31,6 +32,7 @@ private final ElementDeGrille[] vaGrille;
  *
  */
 private final boolean[][] valeursInitial;
+
 /**
  * Constructeur de la grille.
  * @param valeurAcceptees .
@@ -43,9 +45,9 @@ this.valeursInitial = new boolean[g.length][g.length];
 this.grille = new ElementDeGrille[g.length][g.length];
 this.vaGrille = new ElementDeGrille[valeurAcceptees.length];
 
-for ( int i = 0; i < g[0].length; i++ ) {
+for (int i = 0; i < g[0].length; i++) {
     this.vaGrille[i] = valeurAcceptees[i];
-    for ( int j = 0; j < g[0].length; j++ ) {
+    for (int j = 0; j < g[0].length; j++) {
         this.grille[i][j] = g[i][j];
         if (g[i][j] != null) {
             this.valeursInitial[i][j] = true;
@@ -60,7 +62,7 @@ for ( int i = 0; i < g[0].length; i++ ) {
 }
 
 @Override
-public int getDimension() { 
+public int getDimension() {
     return this.grille[0].length;
 }
 
@@ -69,14 +71,8 @@ public Set<ElementDeGrille> getElements() {
     return new HashSet<>(Arrays.asList(this.vaGrille));
 }
 
-/**
- * Déclaration de fonctions sur plusieurs lignes.
- * Afin de respecter les règles checkstyle
- */
 @Override
-public void setValue (final int  x, final int y, final ElementDeGrille value) 
-throws HorsBornesException,ValeurInitialeModificationException,
-ElementInterditException,ValeurImpossibleException {
+public void setValue(final int  x, final int y, final ElementDeGrille value) throws HorsBornesException, ValeurInitialeModificationException, ElementInterditException, ValeurImpossibleException {
 
     // Grille[x,y] dépasse les bornes ?
     if (x > this.grille[0].length || y  > this.grille[0].length) {
@@ -84,17 +80,17 @@ ElementInterditException,ValeurImpossibleException {
     }
 
     // La valeur est une valeur initiale ?
-    if (isValeurInitiale(x,y)) {
-        throw new ValeurInitialeModificationException("Erreur, on tente de modifier la valeur Initiale :"+getValue(x,y)+"a la position x:"+x+"et y:"+y);      
+    if (isValeurInitiale(x, y)) {
+        throw new ValeurInitialeModificationException("Erreur, on tente de modifier la valeur Initiale :" + getValue(x, y) + "a la position x:" + x + "et y:" + y);
     }
 
-    // La valeur est-elle une valeur autorisée ? 
+    // La valeur est-elle une valeur autorisée ?
     if (!(Arrays.asList(this.vaGrille).contains(value))) {
-        throw new ElementInterditException("L'element de grille :"+value+" n'est pas autorise");      
+        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");      
     }
 
     //Les règles du Sudoku pour une sous-grille sont respectés ?
-    int tailleSG = (int)Math.sqrt( this.grille[0].length);
+    int tailleSG = (int) Math.sqrt(this.grille[0].length);
     int indiceSGXDebut = x - (x % tailleSG);
     int indiceDGXFin = indiceSGXDebut + (tailleSG - 1);
     int indiceSGYDebut = y - (y % tailleSG);
@@ -102,7 +98,7 @@ ElementInterditException,ValeurImpossibleException {
 
     for (int i = indiceSGXDebut; i <= indiceDGXFin; i++) {
         for (int j = indiceSGYDebut; j <= indiceSGYFin; j++) {
-            if (getValue(i,j) == value) {
+            if (getValue(i, j) == value) {
                 throw new ValeurImpossibleException("Votre coup ne respecte pas les regles du sudoku");
             }
         }
@@ -111,20 +107,20 @@ ElementInterditException,ValeurImpossibleException {
     // Les règles du Sudoku pour une grille sont respectés ?
 
     // La valeur est-elle déjà présente dans la colonne ?
-    for (int i = 0 ; i < this.grille[0].length; i++) {
+    for (int i = 0; i < this.grille[0].length; i++) {
         if (this.grille[i][y] == value && (i != x)) {
             throw new ValeurImpossibleException("Votre coup ne respecte pas les regles du sudoku");
         }
     }
     
     // La valeur est-elle déjà présente dans la colonne ?
-    for (int j = 0 ; j < this.grille[0].length; j++) {
+    for (int j = 0; j < this.grille[0].length; j++) {
         if (this.grille[x][j] == value && (j != y)) {
             throw new ValeurImpossibleException("Votre coup ne respecte pas les regles du sudoku");
         }
     }
-          
-    
+
+
 }
 
 @Override
@@ -137,10 +133,9 @@ public ElementDeGrille getValue(final int x, final int y) throws HorsBornesExcep
     }
 }
 
-
 @Override
 public boolean isComplete() {
-    
+
     boolean isComplete = true;
 
     for (int i = 0; i < this.grille[0].length; i++) {
@@ -162,17 +157,18 @@ public boolean isPossible(final int x, final int y, final ElementDeGrille value)
     // Grille[x,y] dépasse les bornes ??
     if (x > this.grille[0].length || y > this.grille[0].length) {
         isPossible = false;
-        throw new HorsBornesException("L'indice x :"+x+" et y :"+y+" est hors borne");
-    } 
+        throw new HorsBornesException("L'indice x :" + x + " et y :" + y + " est hors borne");
+    }
     
     // La valeur est-elle une valeur autorisée ?
     if (!(Arrays.asList(this.vaGrille).contains(value))) {
         isPossible = false;
-        throw new ElementInterditException("L'element de grille :"+value+" n'est pas autorise");      
+        throw new ElementInterditException("L'element de grille :" + value + " n'est pas autorise");      
     }
 
     return isPossible;
 }
+
 
 @Override
 public boolean isValeurInitiale(final int x, final int  y) {
