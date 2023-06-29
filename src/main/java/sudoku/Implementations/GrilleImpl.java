@@ -166,7 +166,7 @@ public boolean isValeurInitiale(int x,int y){
     boolean isValeuriIni = false;
 
     if(this.valeursInitial[x][y] == true){
-        return isValeuriIni = true;
+        isValeuriIni = true;
     }
 
     return isValeuriIni;

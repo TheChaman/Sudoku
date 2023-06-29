@@ -1,26 +1,25 @@
 package sudoku.Implementations;
 
-import sudoku.*;
-
+import sudoku.ElementDeGrille;
 
 /**
  * 
  */
 public class ElementDeGrilleImplAsChar implements ElementDeGrille {
 
-/**
- * valueOfElement : 
+/**.
+ * value : 
  * valeur de l'element à insérer dans la grille
  */
-private char valueOfElement;
+private char value;
 
-/**
+/**.
  * Constructeur.
  * @param valueOfElement .
  */
-public ElementDeGrilleImplAsChar(char valueOfElement){
+public ElementDeGrilleImplAsChar(char valueOfElement) {
 
-    this.valueOfElement = valueOfElement;
+    this.value = valueOfElement;
 
 }
 

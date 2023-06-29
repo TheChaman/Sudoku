@@ -31,7 +31,7 @@ public class TestGrille {
     }
 
     @Test
-    public void testKOConstructionRespectantLesRegles() {
+    public void testKOConstructionRespectantLesRegles() throws HorsBornesException, ElementInterditException, ValeurImpossibleException{
 
         ElementDeGrille element1 = new ElementDeGrilleImplAsChar('1');
         ElementDeGrille element2 = new ElementDeGrilleImplAsChar('2');
